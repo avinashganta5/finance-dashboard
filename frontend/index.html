@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Personal Finance Dashboard</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<header>
+  <h1><i class="fas fa-wallet"></i> Personal Finance Dashboard</h1>
+  <div class="header-right">
+    <input type="month" id="monthPicker">
+  </div>
+</header>
+
+<main>
+  <!-- Toolbar -->
+  <div class="toolbar">
+    <button id="addTransactionBtn" class="btn-primary">
+      <i class="fas fa-plus"></i> Add Transaction
+    </button>
+    <button id="setBudgetBtn" class="btn-secondary">
+      <i class="fas fa-bullseye"></i> Set Budget
+    </button>
+  </div>
+
+  <!-- Summary Cards -->
+  <section class="summary">
+    <div class="card income">
+      <div>
+        <span>Total Income</span>
+        <h2 id="totalIncome">$0.00</h2>
+      </div>
+      <i class="fas fa-arrow-up"></i>
+    </div>
+    <div class="card expense">
+      <div>
+        <span>Total Expenses</span>
+        <h2 id="totalExpense">$0.00</h2>
+      </div>
+      <i class="fas fa-arrow-down"></i>
+    </div>
+    <div class="card balance">
+      <div>
+        <span>Balance</span>
+        <h2 id="balance">$0.00</h2>
+      </div>
+      <i class="fas fa-wallet"></i>
+    </div>
+  </section>
+
+  <!-- Charts -->
+  <section class="charts">
+    <div class="chart-box">
+      <h3>Expenses by Category</h3>
+      <canvas id="categoryChart"></canvas>
+    </div>
+    <div class="chart-box">
+      <h3>Income vs Expenses (Last 6 Months)</h3>
+      <canvas id="trendChart"></canvas>
+    </div>
+  </section>
+
+  <!-- Budgets -->
+  <section class="budgets-section">
+    <h3>Budgets</h3>
+    <div id="budgetList" class="budget-list"></div>
+  </section>
+
+  <!-- Transactions -->
+  <section class="transactions-section">
+    <h3>Recent Transactions</h3>
+    <div id="transactionList" class="transaction-list"></div>
+  </section>
+</main>
+
+<!-- Add Transaction Modal -->
+<div id="transactionModal" class="modal hidden">
+  <div class="modal-content">
+    <h2>Add Transaction</h2>
+    <form id="transactionForm">
+      <select id="txType" required>
+        <option value="expense">Expense</option>
+        <option value="income">Income</option>
+      </select>
+      <select id="txCategory" required></select>
+      <input type="number" id="txAmount" placeholder="Amount" step="0.01" required>
+      <input type="text" id="txDescription" placeholder="Description (optional)">
+      <input type="date" id="txDate" required>
+      <div class="modal-actions">
+        <button type="button" class="btn-secondary" data-close="transactionModal">Cancel</button>
+        <button type="submit" class="btn-primary">Save</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Set Budget Modal -->
+<div id="budgetModal" class="modal hidden">
+  <div class="modal-content">
+    <h2>Set Budget</h2>
+    <form id="budgetForm">
+      <select id="budgetCategory" required></select>
+      <input type="number" id="budgetAmount" placeholder="Budget Amount" step="0.01" required>
+      <div class="modal-actions">
+        <button type="button" class="btn-secondary" data-close="budgetModal">Cancel</button>
+        <button type="submit" class="btn-primary">Save</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
