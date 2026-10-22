@@ -1,0 +1,37 @@
+
+pipeline {
+    agent any
+
+    stages {
+        stage('Clean WS') {
+            steps {
+                cleanWs()
+            }
+        }
+
+        stage('Code Checkout') {
+            steps {
+                git(
+                    url: 'https://github.com/avinashganta5/finance-dashboard.git',
+                    branch: 'main'
+                )
+            }
+        }
+
+        stage('Install Dependencies') {
+            steps {
+                dir('backend') {
+                    sh 'npm install'
+                }
+            }
+        }
+
+        stage('Test') {
+            steps {
+                dir('backend') {
+                    sh 'npm test'
+                }
+            }
+        }
+    }
+}
