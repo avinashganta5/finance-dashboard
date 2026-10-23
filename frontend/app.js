@@ -2,7 +2,7 @@ const API = 'http://localhost:5000/api';
 let categories = [];
 let currentMonth, currentYear;
 let categoryChart, trendChart;
-
+//
 // Helpers
 const $ = id => document.getElementById(id);
 const show = id => $(id).classList.remove('hidden');
